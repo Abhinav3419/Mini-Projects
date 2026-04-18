@@ -1,11 +1,9 @@
 <div align="center">
 
-<!-- Animated header using capsule render -->
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0D1117,50:161B22,100:1A6334&height=220&section=header&text=Mini%20Projects&fontSize=72&fontColor=58A6FF&animation=fadeIn&fontAlignY=35&desc=ML%20Engineering%20%E2%80%A2%20Model%20Deployment%20%E2%80%A2%20Production%20Pipelines&descSize=16&descColor=8B949E&descAlignY=55" width="100%"/>
 
 <br>
 
-<!-- Badges row -->
 [![GitHub](https://img.shields.io/badge/GitHub-Abhinav3419-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Abhinav3419)
 [![License](https://img.shields.io/badge/License-All_Rights_Reserved-DA3832?style=for-the-badge&logo=creativecommons&logoColor=white)](#)
 [![Projects](https://img.shields.io/badge/Mini_Projects-01-58A6FF?style=for-the-badge&logo=tensorflow&logoColor=white)](#mini-projects)
@@ -18,7 +16,6 @@
 
 <br>
 
-<!-- Tech stack pills -->
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=flat-square&logo=tensorflow&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white)
@@ -100,29 +97,76 @@ A neural network that predicts annual medical insurance charges from patient dem
 
 ## `// Repo Structure`
 
-```
-Mini-Projects/
-│
-├── 01-Medical-Insurance-Cost-Predictor/
-│   ├── README.md .................. project overview + results + learnings
-│   ├── notebooks/
-│   │   └── Project_Insurance_Cost_Prediction.ipynb
-│   ├── app/
-│   │   ├── __init__.py
-│   │   ├── main.py ............... FastAPI server (routes, schemas, health)
-│   │   └── predictor.py .......... prediction pipeline (load, validate, predict)
-│   ├── model/
-│   │   ├── best_insurance_model.h5
-│   │   ├── feature_scaler.pkl
-│   │   └── feature_info.pkl
-│   ├── tests/
-│   │   └── test_local.py ......... 7 smoke tests
-│   ├── Dockerfile ................ production container recipe
-│   ├── .dockerignore
-│   └── requirements.txt .......... pinned dependencies
-│
-└── ... (next project loading...)
-```
+<table>
+<tr>
+<td>
+
+<details open>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>Mini-Projects</b></summary>
+<blockquote>
+
+&nbsp;📄&nbsp;&nbsp;<code>README.md</code><br>
+&nbsp;📄&nbsp;&nbsp;<code>.gitignore</code><br>
+&nbsp;📄&nbsp;&nbsp;<code>LICENSE</code>
+
+<details open>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>01-Medical-Insurance-Cost-Predictor</b></summary>
+<blockquote>
+
+&nbsp;📄&nbsp;&nbsp;<code>README.md</code>&nbsp;&nbsp;—&nbsp;&nbsp;project overview + results<br>
+&nbsp;🐳&nbsp;&nbsp;<code>Dockerfile</code>&nbsp;&nbsp;—&nbsp;&nbsp;production container recipe<br>
+&nbsp;🚫&nbsp;&nbsp;<code>.dockerignore</code><br>
+&nbsp;📦&nbsp;&nbsp;<code>requirements.txt</code>&nbsp;&nbsp;—&nbsp;&nbsp;pinned dependencies
+
+<details>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>notebooks</b>&nbsp;&nbsp;<sup>training & experimentation</sup></summary>
+<blockquote>
+&nbsp;📓&nbsp;&nbsp;<code>Project_Insurance_Cost_Prediction.ipynb</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sub>7 models · EDA · segment analysis · diagnostic plots</sub>
+</blockquote>
+</details>
+
+<details>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>app</b>&nbsp;&nbsp;<sup>FastAPI prediction service</sup></summary>
+<blockquote>
+&nbsp;🐍&nbsp;&nbsp;<code>__init__.py</code><br>
+&nbsp;🐍&nbsp;&nbsp;<code>main.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;routes · Pydantic schemas · health checks · logging<br>
+&nbsp;🐍&nbsp;&nbsp;<code>predictor.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;load → validate → encode → engineer → scale → predict
+</blockquote>
+</details>
+
+<details>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>model</b>&nbsp;&nbsp;<sup>trained artifacts</sup></summary>
+<blockquote>
+&nbsp;🧠&nbsp;&nbsp;<code>best_insurance_model.h5</code>&nbsp;&nbsp;—&nbsp;&nbsp;128-64-32 Swish network&nbsp;&nbsp;<sup>190 KB</sup><br>
+&nbsp;⚖️&nbsp;&nbsp;<code>feature_scaler.pkl</code>&nbsp;&nbsp;—&nbsp;&nbsp;fitted StandardScaler<br>
+&nbsp;📋&nbsp;&nbsp;<code>feature_info.pkl</code>&nbsp;&nbsp;—&nbsp;&nbsp;column order & metadata
+</blockquote>
+</details>
+
+<details>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>tests</b>&nbsp;&nbsp;<sup>smoke tests</sup></summary>
+<blockquote>
+&nbsp;🧪&nbsp;&nbsp;<code>test_local.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;7 tests: predictions · validation · segments
+</blockquote>
+</details>
+
+</blockquote>
+</details>
+
+<details>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>02-???</b></summary>
+<blockquote>
+&nbsp;🔜&nbsp;&nbsp;<i>next project loading...</i>
+</blockquote>
+</details>
+
+</blockquote>
+</details>
+
+</td>
+</tr>
+</table>
 
 &nbsp;
 

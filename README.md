@@ -50,7 +50,7 @@ Production-oriented ML mini projects — not tutorials, not Kaggle kernels. Each
 
 **Domain:** Healthcare · Insurance · Regression · MLOps
 
-> *"Your model's training loss is $1,400. What's the test loss?" — Every ML interview, ever.*
+> *"Your model's training loss is $1,400. Great. What's the test loss?"*
 
 A neural network that predicts annual medical insurance charges from patient demographics. Built through **systematic experimentation** — 7 model iterations that demonstrate the real hierarchy of what matters in ML:
 
@@ -139,19 +139,17 @@ Mini-Projects/
 
 &nbsp;
 
-## `// Interview Concepts Covered`
-
-Each project is annotated with interview-relevant concepts in the code comments:
+## `// Engineering Principles`
 
 ```
-🎯 Training-Serving Skew     — Why feature pipelines must be identical
-🎯 Cold Start vs Warm Start  — Model loading strategy in production
-🎯 Bias-Variance Tradeoff    — Why smaller models generalized better
-🎯 REST API Design           — GET vs POST, schema validation, status codes
-🎯 Docker Layer Caching      — Why COPY requirements.txt before code
-🎯 Health Checks             — Liveness and readiness probes
-🎯 Singleton Pattern         — One model instance, many requests
-🎯 Defensive Programming     — Validate before predict, fail fast
+🔬  Training-Serving Parity    — Feature pipelines are identical in notebook and API
+📊  Segment-wise Evaluation    — Overall MAE hides per-group performance; always decompose
+🧪  Controlled Experiments     — Change one variable at a time, measure on held-out test set
+🛡️  Defensive Prediction       — Validate inputs before they reach the model
+⚡  Efficient Serving          — Load model once at startup, serve many requests
+📦  Reproducible Environments  — Pinned dependencies, Docker containers, deterministic seeds
+🔁  Callback-Driven Training   — EarlyStopping + ReduceLROnPlateau replace manual epoch tuning
+📈  Multi-Metric Reporting     — MAE alone is incomplete; always report RMSE + R² alongside
 ```
 
 &nbsp;

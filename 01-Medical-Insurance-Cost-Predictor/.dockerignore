@@ -1,0 +1,17 @@
+# .dockerignore
+#
+# WHY? Same concept as .gitignore — keeps the Docker image small
+# by excluding files that aren't needed at runtime.
+# Smaller image = faster builds, faster deploys, lower AWS storage costs.
+
+__pycache__/
+*.pyc
+*.pyo
+.git/
+.gitignore
+*.md
+tests/
+.env
+*.ipynb
+.pytest_cache/
+*.egg-info/

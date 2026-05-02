@@ -6,12 +6,12 @@
 
 [![GitHub](https://img.shields.io/badge/GitHub-Abhinav3419-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Abhinav3419)
 [![License](https://img.shields.io/badge/License-All_Rights_Reserved-DA3832?style=for-the-badge&logo=creativecommons&logoColor=white)](#)
-[![Projects](https://img.shields.io/badge/Mini_Projects-01-58A6FF?style=for-the-badge&logo=tensorflow&logoColor=white)](#mini-projects)
+[![Projects](https://img.shields.io/badge/Mini_Projects-02-58A6FF?style=for-the-badge&logo=tensorflow&logoColor=white)](#mini-projects)
 [![Status](https://img.shields.io/badge/Status-Active-00C853?style=for-the-badge&logo=statuspage&logoColor=white)](#)
 
 <br>
 
-*Hands-on ML engineering projects — from raw data to deployed APIs.*
+*Hands-on ML engineering projects — from raw data to deployed APIs to real-time crisis intelligence.*
 *Each project documents the full journey: exploration, modeling, evaluation, and production deployment.*
 
 <br>
@@ -23,6 +23,9 @@
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
 ![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white)
 ![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)
+![ChromaDB](https://img.shields.io/badge/ChromaDB-FF6B6B?style=flat-square)
+![Folium](https://img.shields.io/badge/Folium-77B829?style=flat-square)
 
 </div>
 
@@ -95,7 +98,63 @@ A neural network that predicts annual medical insurance charges from patient dem
 
 &nbsp;
 
-## `// Repo Structure`
+<table>
+<tr>
+<td width="80" align="center"><b><code>02</code></b></td>
+<td>
+
+### [CrisisLens AI — Urban Decision Intelligence](./02-CrisisLens-AI/)
+
+**Domain:** GovTech · Geospatial · RAG · Physics-Informed ML · Crisis Response
+
+> *"The nearest ambulance is 2km away. The fastest is 5km away. Which one do you send?"*
+
+A **7-module Urban Decision Intelligence Platform** for New Delhi that combines live weather data, physics-based flood prediction, hospital capacity tracking, incident command, telecom anomaly detection, RAG-powered crisis advisory, and dispatch route optimization into a single Streamlit command-center interface.
+
+&nbsp;
+
+**The Modules:**
+
+| # | Module | What It Does | Key Result |
+|:---|:---|:---|---:|
+| `M1` | 🌦️ Weather + Flood Risk | Live weather + 8-zone flood risk heatmap | Open-Meteo API |
+| `M2` | 🌊 Manning's Flood Model | Predicts flood arrival time at 5 Yamuna stations | Q = (1/n)AR^⅔S^½ |
+| `M3` | 🏥 Hospital Capacity | 20 hospitals with bed/ICU availability | Simulated live |
+| `M4` | 🚨 Incident Command | Geotagged incidents + 4-modifier severity classifier | GDELT + simulated |
+| `M4B` | 📡 Telecom Anomaly | 500 cell towers, Z-score crisis detection | Zero false positives |
+| `M5` | 📚 RAG Crisis Advisor | NDMA/DDMA protocol retrieval via ChromaDB | 15 protocols |
+| `M6` | 🚑 Dispatch Optimizer | Fastest-route dispatch (not nearest-by-distance) | **8+ min saved** |
+
+&nbsp;
+
+**Key Insight:** In the Mayur Vihar flood scenario, dispatching by fastest road route saved **8.4 minutes** over dispatching the nearest unit by straight-line distance. In emergency response, 8 minutes is the difference between life and death.
+
+&nbsp;
+
+**What's Inside:**
+
+| Component | Description |
+|:---|:---|
+| `app.py` | Premium Streamlit UI — 7 interactive tabs, light-mode, gradient accents |
+| `config.py` | New Delhi geography: Yamuna stations, flood zones, 20 hospitals, Manning's params |
+| `data_ingestion.py` | Unified data layer — weather, hospitals, flood risk, incidents (all APIs) |
+| `modules/` | 7 self-contained modules with individual demos and tests |
+| `data/` | Generated maps (Folium HTML), temp files |
+
+&nbsp;
+
+![Manning](https://img.shields.io/badge/Physics-Manning's_Equation-1A5E20?style=flat-square)
+![RAG](https://img.shields.io/badge/RAG-ChromaDB_15_Protocols-FF6B6B?style=flat-square)
+![Towers](https://img.shields.io/badge/Telecom-500_Towers_Z--Score-4A148C?style=flat-square)
+![Dispatch](https://img.shields.io/badge/Dispatch-8+_min_saved-2563EB?style=flat-square)
+![Streamlit](https://img.shields.io/badge/UI-Streamlit_Premium-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)
+![Live](https://img.shields.io/badge/Data-Live_APIs-00C853?style=flat-square)
+
+</td>
+</tr>
+</table>
+
+&nbsp;
 
 <table>
 <tr>
@@ -154,10 +213,30 @@ A neural network that predicts annual medical insurance charges from patient dem
 </blockquote>
 </details>
 
-<details>
-<summary>&nbsp;📂&nbsp;&nbsp;<b>02-???</b></summary>
+<details open>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>02-CrisisLens-AI</b></summary>
 <blockquote>
-&nbsp;🔜&nbsp;&nbsp;<i>next project loading...</i>
+
+&nbsp;📄&nbsp;&nbsp;<code>README.md</code>&nbsp;&nbsp;—&nbsp;&nbsp;full documentation + architecture<br>
+&nbsp;🏙️&nbsp;&nbsp;<code>app.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;Streamlit 7-tab premium UI<br>
+&nbsp;⚙️&nbsp;&nbsp;<code>config.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;New Delhi geography, zones, hospitals<br>
+&nbsp;📡&nbsp;&nbsp;<code>data_ingestion.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;unified data layer (all APIs)<br>
+&nbsp;📦&nbsp;&nbsp;<code>requirements.txt</code><br>
+&nbsp;📄&nbsp;&nbsp;<code>LICENSE</code>
+
+<details>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>modules</b>&nbsp;&nbsp;<sup>7 self-contained modules</sup></summary>
+<blockquote>
+&nbsp;🌦️&nbsp;&nbsp;<code>weather_flood.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;live weather + flood risk heatmap<br>
+&nbsp;🌊&nbsp;&nbsp;<code>manning_model.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;Manning's equation flood prediction<br>
+&nbsp;🏥&nbsp;&nbsp;<code>hospital_panel.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;hospital capacity + nearest routing<br>
+&nbsp;🚨&nbsp;&nbsp;<code>incident_map.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;incident command + severity classifier<br>
+&nbsp;📡&nbsp;&nbsp;<code>telecom_anomaly.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;500 towers, Z-score anomaly detection<br>
+&nbsp;📚&nbsp;&nbsp;<code>rag_advisor.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;RAG crisis advisor (ChromaDB, 15 protocols)<br>
+&nbsp;🚑&nbsp;&nbsp;<code>dispatch_optimizer.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;fastest-route dispatch optimizer
+</blockquote>
+</details>
+
 </blockquote>
 </details>
 
@@ -180,6 +259,12 @@ A neural network that predicts annual medical insurance charges from patient dem
 | `ML Deployment` | FastAPI serving, Pydantic validation, health checks, Docker containerization | `#01` |
 | `Production Patterns` | Singleton model loading, training-serving parity, input validation, logging | `#01` |
 | `Experiment Tracking` | Progressive model comparison with controlled variables | `#01` |
+| `Physics-Informed ML` | Manning's equation for flood prediction, kinematic wave propagation | `#02` |
+| `RAG & LLM` | ChromaDB vector store, NDMA protocol retrieval, context-aware advisory | `#02` |
+| `Geospatial Analytics` | Folium interactive maps, flood risk heatmaps, hospital routing | `#02` |
+| `Anomaly Detection` | Z-score on diurnal time-series, spatial clustering (DBSCAN-like) | `#02` |
+| `Live API Integration` | Open-Meteo weather, GDELT news events, OpenRouteService routing | `#02` |
+| `System Design` | 7-module architecture, unified data layer, graceful API fallbacks | `#02` |
 
 &nbsp;
 
@@ -203,19 +288,20 @@ A neural network that predicts annual medical insurance charges from patient dem
 ```bash
 # Clone the repo
 git clone https://github.com/Abhinav3419/Mini-Projects.git
-cd Mini-Projects/01-Medical-Insurance-Cost-Predictor
+cd Mini-Projects
 
-# Setup environment
-python -m venv venv
-venv\Scripts\activate          # Windows
+# ─── Project 01: Insurance Cost Predictor ───
+cd 01-Medical-Insurance-Cost-Predictor
 pip install -r requirements.txt
-
-# Run tests
 python tests/test_local.py
-
-# Start the API
 uvicorn app.main:app --reload
 # → http://localhost:8000/docs (Swagger UI)
+
+# ─── Project 02: CrisisLens AI ───
+cd ../02-CrisisLens-AI
+pip install -r requirements.txt
+streamlit run app.py
+# → http://localhost:8501 → Press LAUNCH
 ```
 
 &nbsp;

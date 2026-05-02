@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.env
+data/*.html
+data/chroma_db/
+.streamlit/
+*.egg-info/
+.DS_Store

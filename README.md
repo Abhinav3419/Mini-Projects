@@ -6,7 +6,7 @@
 
 [![GitHub](https://img.shields.io/badge/GitHub-Abhinav3419-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Abhinav3419)
 [![License](https://img.shields.io/badge/License-All_Rights_Reserved-DA3832?style=for-the-badge&logo=creativecommons&logoColor=white)](#)
-[![Projects](https://img.shields.io/badge/Mini_Projects-02-58A6FF?style=for-the-badge&logo=tensorflow&logoColor=white)](#mini-projects)
+[![Projects](https://img.shields.io/badge/Mini_Projects-03-58A6FF?style=for-the-badge&logo=tensorflow&logoColor=white)](#mini-projects)
 [![Status](https://img.shields.io/badge/Status-Active-00C853?style=for-the-badge&logo=statuspage&logoColor=white)](#)
 
 <br>
@@ -26,6 +26,10 @@
 ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)
 ![ChromaDB](https://img.shields.io/badge/ChromaDB-FF6B6B?style=flat-square)
 ![Folium](https://img.shields.io/badge/Folium-77B829?style=flat-square)
+![XGBoost](https://img.shields.io/badge/XGBoost-EC6C35?style=flat-square)
+![Transformers](https://img.shields.io/badge/Transformers-FFD21E?style=flat-square&logo=huggingface&logoColor=black)
+![MLflow](https://img.shields.io/badge/MLflow-0194E2?style=flat-square&logo=mlflow&logoColor=white)
+![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)
 
 </div>
 
@@ -158,6 +162,78 @@ A **7-module Urban Decision Intelligence Platform** for New Delhi that combines 
 
 <table>
 <tr>
+<td width="80" align="center"><b><code>03</code></b></td>
+<td>
+
+### [CrudeNerve — Geopolitical Signal Engine for Crude Oil Volatility](./03-CrudeNerve/)
+
+**Domain:** Quantitative Finance · NLP · Geopolitics · Physics-Informed ML · Signal Processing
+
+> *"Trump posted about Iran sanctions at 7:14 AM. VIX moved at 9:31 AM. That's 137 minutes of alpha."*
+
+A **23-module geopolitical signal processing engine** that predicts VIX direction and Brent crude return distributions by exploiting the lag between geopolitical rhetoric and market response. Ingests 5 real-time data streams, processes them through transformer NLP and physics-informed DHO decay kernels, and outputs calibrated probability distributions across 3 prediction modes.
+
+&nbsp;
+
+**The Pipeline:**
+
+| Tier | Modules | What It Does | Key Detail |
+|:---|:---|:---|---:|
+| `Tier 0` | D1-D5 | 5 data ingestion streams | GDELT, Truth Social, Twitter, Supply, Price/VIX |
+| `NLP` | nlp_engine | Transformer sentiment + negation detection | all-MiniLM-L6-v2 + VADER |
+| `Tier 1` | F1-F8 | 8 feature engineering modules | DHO kernels, 3 modes, 10-level war barometer |
+| `Tier 2` | M1-M4 | 4 ML model modules | HMM×4 states, XGBoost×60, Platt calibration |
+| `Tier 3` | O1-O3 | API + Dashboard + Tracking | FastAPI 9 endpoints, React, MLflow |
+
+&nbsp;
+
+**Original Contributions:**
+
+| Contribution | Description |
+|:---|:---|
+| **DHO Decay Kernel** | Each geopolitical event modeled as a damped harmonic oscillator impulse response — sanctions are underdamped (persist weeks), Trump bluster is overdamped (fades in days). Damping ratio is severity-graded. |
+| **3 Prediction Modes** | Intuitive (face value), Counter-Intuitive (flip/zero contrarian), Golden Mean (per-signal toggle with 8 streams and 4 presets). Same data, different market hypotheses. |
+| **War Tension Barometer** | 10-level USA-Iran-Israel escalation ladder dynamically assessed from all streams. Modifies feature weights across all modes. Level 1 (diplomatic calm) to Level 10 (full-scale war). |
+| **Negation-Aware NLP** | Transformer cosine similarity to anchor sentences, not keyword matching. "NOT sanctioning Iran" scores 64.5% lower than "sanctioning Iran." |
+
+&nbsp;
+
+**Key Insight:** A severity-4.5+ Trump post about Iran gets underdamped DHO parameters (ζ=0.1, ω_n=1.4) — the market shock persists 7-14 days because follow-up actions keep re-exciting the system. A severity-1.5 post gets ζ=0.7 — noise that fades overnight.
+
+&nbsp;
+
+**What's Inside:**
+
+| Component | Description |
+|:---|:---|
+| `config/settings.py` | Central config — all tunable parameters, DHO tables, severity weights, stream definitions |
+| `data_ingest/` | 5 stream pipelines: GDELT events, Truth Social deep NLP, Twitter sentiment, physical supply, price/VIX |
+| `features/` | 8 feature modules: merge, tension index, DHO kernels, Trump volatility, Twitter signals, supply disruption, 3 prediction modes, war barometer |
+| `models/` | HMM regime detector (4 states), regime-specific XGBoost (60 models), Platt-calibrated ensemble, walk-forward evaluation + SHAP |
+| `utils/nlp_engine.py` | Transformer NLP: sentence-transformers embeddings, VADER ensemble, negation detection, entity extraction |
+| `api/app.py` | FastAPI — 9 endpoints including `/predict` with mode + war level params |
+| `dashboard/App.jsx` | React trading dashboard — mode toggle, war barometer dial, quantile fan charts, SHAP drivers |
+| `utils/mlflow_tracker.py` | MLflow experiment tracking — mode and war level as first-class experiment dimensions |
+
+&nbsp;
+
+![XGBoost](https://img.shields.io/badge/XGBoost-60_Quantile_Models-EC6C35?style=flat-square)
+![HMM](https://img.shields.io/badge/HMM-4_State_Regime-8B5CF6?style=flat-square)
+![Brier](https://img.shields.io/badge/Brier_Score-0.023-00C853?style=flat-square)
+![AUC](https://img.shields.io/badge/AUC-0.997-58A6FF?style=flat-square)
+![NLP](https://img.shields.io/badge/NLP-Transformer+VADER-FFD21E?style=flat-square&logo=huggingface&logoColor=black)
+![API](https://img.shields.io/badge/API-FastAPI_9_Endpoints-009688?style=flat-square&logo=fastapi&logoColor=white)
+![Modules](https://img.shields.io/badge/Modules-23-8B949E?style=flat-square)
+![Lines](https://img.shields.io/badge/Lines-8,952-181717?style=flat-square)
+
+</td>
+</tr>
+</table>
+
+&nbsp;
+
+<table>
+<tr>
 <td>
 
 <details open>
@@ -240,6 +316,89 @@ A **7-module Urban Decision Intelligence Platform** for New Delhi that combines 
 </blockquote>
 </details>
 
+<details open>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>03-CrudeNerve</b></summary>
+<blockquote>
+
+&nbsp;📄&nbsp;&nbsp;<code>README.md</code>&nbsp;&nbsp;—&nbsp;&nbsp;full documentation + architecture + API reference<br>
+&nbsp;📦&nbsp;&nbsp;<code>requirements.txt</code>&nbsp;&nbsp;—&nbsp;&nbsp;pinned dependencies<br>
+&nbsp;📄&nbsp;&nbsp;<code>LICENSE</code><br>
+&nbsp;🚫&nbsp;&nbsp;<code>.gitignore</code>
+
+<details>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>config</b>&nbsp;&nbsp;<sup>central configuration</sup></summary>
+<blockquote>
+&nbsp;⚙️&nbsp;&nbsp;<code>settings.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;all tunable params, DHO tables, severity weights, stream definitions
+</blockquote>
+</details>
+
+<details>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>data_ingest</b>&nbsp;&nbsp;<sup>5 stream pipelines</sup></summary>
+<blockquote>
+&nbsp;🌍&nbsp;&nbsp;<code>d1_gdelt.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;GDELT 2.0 event ingestion + entity tagging<br>
+&nbsp;📢&nbsp;&nbsp;<code>d2_truth_social.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;Truth Social scraper + transformer NLP pipeline<br>
+&nbsp;🐦&nbsp;&nbsp;<code>d3_twitter.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;Twitter/X sentiment + elite-retail split<br>
+&nbsp;🛢️&nbsp;&nbsp;<code>d4_supply.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;EIA, SPR, Hormuz throughput, OPEC compliance<br>
+&nbsp;📈&nbsp;&nbsp;<code>d5_price_vix.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;Brent, WTI, VIX from Yahoo Finance + FRED
+</blockquote>
+</details>
+
+<details>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>features</b>&nbsp;&nbsp;<sup>8 feature engineering modules</sup></summary>
+<blockquote>
+&nbsp;🔗&nbsp;&nbsp;<code>f1_merge.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;time-indexed merge engine<br>
+&nbsp;🌡️&nbsp;&nbsp;<code>f2_tension_index.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;geopolitical tension index (entity-weighted EMA)<br>
+&nbsp;〰️&nbsp;&nbsp;<code>f3_dho_kernel.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;damped harmonic oscillator decay kernels<br>
+&nbsp;🔥&nbsp;&nbsp;<code>f4_trump_volatility.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;Trump policy-shock score + temporal patterns<br>
+&nbsp;📊&nbsp;&nbsp;<code>f5_twitter_features.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;fear index, divergence, cross-platform echo<br>
+&nbsp;⛽&nbsp;&nbsp;<code>f6_supply_features.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;disruption score, supply stress composite<br>
+&nbsp;🎛️&nbsp;&nbsp;<code>f7_prediction_mode.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;3 prediction modes + 8 stream toggles<br>
+&nbsp;⚔️&nbsp;&nbsp;<code>f8_war_barometer.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;10-level USA-Iran-Israel escalation ladder
+</blockquote>
+</details>
+
+<details>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>models</b>&nbsp;&nbsp;<sup>4 ML model modules</sup></summary>
+<blockquote>
+&nbsp;🔄&nbsp;&nbsp;<code>m1_hmm_regime.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;4-state Gaussian HMM regime detector<br>
+&nbsp;🌲&nbsp;&nbsp;<code>m2_regime_xgboost.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;60 regime × horizon × quantile models<br>
+&nbsp;⚖️&nbsp;&nbsp;<code>m3_ensemble.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;Platt-calibrated ensemble predictor<br>
+&nbsp;📏&nbsp;&nbsp;<code>m4_evaluation.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;walk-forward eval + feature importance
+</blockquote>
+</details>
+
+<details>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>api</b>&nbsp;&nbsp;<sup>FastAPI backend</sup></summary>
+<blockquote>
+&nbsp;🚀&nbsp;&nbsp;<code>app.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;9 endpoints: /predict, /war-assessment, /modes, /streams, /presets, /health
+</blockquote>
+</details>
+
+<details>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>dashboard</b>&nbsp;&nbsp;<sup>React frontend</sup></summary>
+<blockquote>
+&nbsp;⚛️&nbsp;&nbsp;<code>App.jsx</code>&nbsp;&nbsp;—&nbsp;&nbsp;trading interface: mode toggle, war dial, quantile fan, SHAP drivers
+</blockquote>
+</details>
+
+<details>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>utils</b>&nbsp;&nbsp;<sup>shared utilities</sup></summary>
+<blockquote>
+&nbsp;🧠&nbsp;&nbsp;<code>nlp_engine.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;transformer NLP: embeddings, severity, sentiment, negation, entities<br>
+&nbsp;📋&nbsp;&nbsp;<code>mlflow_tracker.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;experiment tracking: mode + war level as dimensions
+</blockquote>
+</details>
+
+<details>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>tests</b>&nbsp;&nbsp;<sup>integration tests</sup></summary>
+<blockquote>
+&nbsp;🧪&nbsp;&nbsp;<code>test_integration.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;end-to-end pipeline: all 5 streams → all features → unified DataFrame
+</blockquote>
+</details>
+
+</blockquote>
+</details>
+
 </blockquote>
 </details>
 
@@ -265,6 +424,14 @@ A **7-module Urban Decision Intelligence Platform** for New Delhi that combines 
 | `Anomaly Detection` | Z-score on diurnal time-series, spatial clustering (DBSCAN-like) | `#02` |
 | `Live API Integration` | Open-Meteo weather, GDELT news events, OpenRouteService routing | `#02` |
 | `System Design` | 7-module architecture, unified data layer, graceful API fallbacks | `#02` |
+| `Physics-Informed Finance` | DHO impulse response kernels for geopolitical event decay modeling | `#03` |
+| `Transformer NLP` | Sentence-transformers cosine similarity, VADER ensemble, negation-aware scoring | `#03` |
+| `Quantile Regression` | 60 regime × horizon × quantile XGBoost models with Platt calibration | `#03` |
+| `Regime Detection` | 4-state Gaussian HMM on geopolitical tension for market regime classification | `#03` |
+| `Signal Processing` | 5-stream real-time data fusion, temporal pattern detection, burst analysis | `#03` |
+| `Multi-Modal Prediction` | 3 prediction modes (Intuitive/Counter-Intuitive/Golden Mean) with 8 toggleable streams | `#03` |
+| `Dynamic Risk Assessment` | 10-level war tension barometer with max-biased sub-score aggregation | `#03` |
+| `Full-Stack ML` | FastAPI 9-endpoint backend, React dashboard, MLflow experiment tracking | `#03` |
 
 &nbsp;
 
@@ -279,6 +446,8 @@ A **7-module Urban Decision Intelligence Platform** for New Delhi that combines 
 📦  Reproducible Environments  — Pinned dependencies, Docker containers, deterministic seeds
 🔁  Callback-Driven Training   — EarlyStopping + ReduceLROnPlateau replace manual epoch tuning
 📈  Multi-Metric Reporting     — MAE alone is incomplete; always report RMSE + R² alongside
+🌊  Physics-Informed Features  — Domain equations (Manning's, DHO) outperform pure data-driven approaches
+🎯  Probabilistic Outputs      — Quantile distributions over point estimates; calibration over accuracy
 ```
 
 &nbsp;
@@ -302,6 +471,14 @@ cd ../02-CrisisLens-AI
 pip install -r requirements.txt
 streamlit run app.py
 # → http://localhost:8501 → Press LAUNCH
+
+# ─── Project 03: CrudeNerve ───
+cd ../03-CrudeNerve
+pip install -r requirements.txt
+python -m crudenerve.tests.test_integration    # verify pipeline
+python -m crudenerve.api.app                   # start API
+# → http://localhost:8000/docs (Swagger UI)
+# → POST /predict with {"mode": "intuitive", "war_level": 5}
 ```
 
 &nbsp;

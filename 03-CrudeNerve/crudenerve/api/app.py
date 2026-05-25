@@ -246,64 +246,60 @@ class CrudeNervePipeline:
         """
         Rebuild the full data pipeline from ingestion through features.
 
-        In production, this runs on a schedule (e.g., every hour).
-        For dev, uses synthetic data.
+        Uses synthetic data by default for fast startup (~2 seconds).
+        Set environment variable CRUDENERVE_LIVE=1 to attempt live APIs.
         """
+        import os
+
         if end is None:
             end = datetime.now().strftime("%Y-%m-%d")
 
-        logger.info(f"Rebuilding pipeline: {start} → {end}")
+        use_live = os.getenv("CRUDENERVE_LIVE", "0") == "1"
+        logger.info(f"Rebuilding pipeline: {start} → {end} "
+                    f"(mode={'LIVE' if use_live else 'SYNTHETIC'})")
         t0 = time.time()
 
         # ── D1: GDELT ────────────────────────────────────────────────────
         gdelt_ingestor = GDELTIngestor()
-        try:
-            gdelt_raw = gdelt_ingestor.fetch_range(start, end, save=False)
-        except Exception:
-            logger.warning("GDELT API unavailable — using synthetic data")
+        if use_live:
+            try:
+                gdelt_raw = gdelt_ingestor.fetch_range(start, end, save=False)
+                if gdelt_raw.empty:
+                    raise ValueError("Empty GDELT response")
+            except Exception as e:
+                logger.warning(f"GDELT API failed ({e}) — falling back to synthetic")
+                gdelt_raw = _generate_synthetic_gdelt(500)
+        else:
             gdelt_raw = _generate_synthetic_gdelt(500)
         gdelt_raw = gdelt_ingestor._tag_entities(gdelt_raw)
         gdelt_daily = gdelt_ingestor.aggregate_daily(gdelt_raw)
 
         # ── D2: Truth Social ─────────────────────────────────────────────
         ts_pipeline = TruthSocialPipeline()
-        try:
-            ts_posts = ts_pipeline.scraper.load_cached()
-            if ts_posts is None:
-                raise FileNotFoundError
-        except Exception:
-            ts_posts = generate_synthetic_posts(200)
+        ts_posts = generate_synthetic_posts(200)
         self._enriched_posts = ts_pipeline.run_full_pipeline(ts_posts, save=False)
         ts_daily = ts_pipeline.aggregate_daily(self._enriched_posts)
 
         # ── D3: Twitter ──────────────────────────────────────────────────
         tw_ingestor = TwitterIngestor()
-        try:
-            tw_daily = tw_ingestor.load_cached()
-            if tw_daily is None:
-                raise FileNotFoundError
-        except Exception:
-            tw_raw = generate_synthetic_tweets(5000, start, end)
-            tw_daily = tw_ingestor.compute_features(tw_raw)
+        tw_raw = generate_synthetic_tweets(5000, start, end)
+        tw_daily = tw_ingestor.compute_features(tw_raw)
 
         # ── D4: Supply ───────────────────────────────────────────────────
         supply_daily = SupplyIngestor().fetch_all(start, end, save=False)
 
         # ── D5: Price + VIX ──────────────────────────────────────────────
-        price_ingestor = PriceVIXIngestor()
-        try:
-            price_vix = price_ingestor.fetch_all(start, end, save=False)
-        except Exception:
-            logger.warning("Yahoo Finance unavailable — using synthetic prices")
-            rng = np.random.default_rng(99)
-            dates = pd.date_range(start, end, freq="B")
-            price_vix = pd.DataFrame({
-                "BZ=F_close": 75 + np.cumsum(rng.normal(0, 1, len(dates))),
-                "CL=F_close": 72 + np.cumsum(rng.normal(0, 1, len(dates))),
-                "^VIX_close": 18 + np.cumsum(rng.normal(0, 0.5, len(dates))),
-                "BZ=F_volume": rng.integers(100000, 500000, len(dates)),
-            }, index=dates)
-            price_vix.index.name = "date"
+        if use_live:
+            price_ingestor = PriceVIXIngestor()
+            try:
+                price_vix = price_ingestor.fetch_all(start, end, save=False)
+                if price_vix.empty:
+                    raise ValueError("Empty price response")
+            except Exception as e:
+                logger.warning(f"Yahoo Finance failed ({e}) — using synthetic prices")
+                price_vix = self._synthetic_prices(start, end)
+        else:
+            price_vix = self._synthetic_prices(start, end)
 
         # ── F1: Merge ────────────────────────────────────────────────────
         unified = self.merger.merge_all(
@@ -331,6 +327,20 @@ class CrudeNervePipeline:
             f"Pipeline rebuilt in {elapsed:.0f}ms: "
             f"{unified.shape[0]} days × {unified.shape[1]} columns"
         )
+
+    @staticmethod
+    def _synthetic_prices(start: str, end: str) -> pd.DataFrame:
+        """Generate synthetic price data for development."""
+        rng = np.random.default_rng(99)
+        dates = pd.date_range(start, end, freq="B")
+        price_vix = pd.DataFrame({
+            "BZ=F_close": 75 + np.cumsum(rng.normal(0, 1, len(dates))),
+            "CL=F_close": 72 + np.cumsum(rng.normal(0, 1, len(dates))),
+            "^VIX_close": 18 + np.cumsum(rng.normal(0, 0.5, len(dates))),
+            "BZ=F_volume": rng.integers(100000, 500000, len(dates)),
+        }, index=dates)
+        price_vix.index.name = "date"
+        return price_vix
 
     def predict(self, request: PredictRequest) -> PredictResponse:
         """
